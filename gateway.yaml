@@ -1,7 +1,7 @@
 apiVersion: datapower.ibm.com/v1beta3
 kind: DataPowerService
 metadata:
-  namespace: datapower-ns-1
+  namespace: dp01-ns
   name: dp01
 spec:
   license:
