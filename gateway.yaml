@@ -1,12 +1,12 @@
 apiVersion: datapower.ibm.com/v1beta3
 kind: DataPowerService
 metadata:
-  namespace: datapower2
-  name: dp3
+  namespace: dp01-ns
+  name: dp01
 spec:
   license:
     accept: true
-    license: L-RJON-BYDR3Q
+    license: L-RJON-CCCP46
     use: nonproduction
   resources:
     limits:
@@ -17,20 +17,20 @@ spec:
   users:
     - accessLevel: privileged
       name: admin
-      passwordSecret: admin-credentials
+      passwordSecret: admin-secret
   domains:
     - certs:
         - certType: usrcerts
-          secret: booking-service-alice
+          secret: booking-service-secret1
         - certType: usrcerts
-          secret: booking-service-booking-application
-        - secret: sharesecret
-          certType: usrcerts
+          secret: booking-service-secret2
+        - certType: usrcerts
+          secret: booking-service-secret3
       dpApp:
         config:
-          - domain-config
+          - booking-service-config
         local:
-          - booking-service-file-system
+          - booking-service-local
       name: Booking
   version: 10.0-cd
   replicas: 1
