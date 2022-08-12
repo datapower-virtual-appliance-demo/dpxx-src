@@ -1,0 +1,21 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: clone-build-push-run
+spec:
+  pipelineRef:
+    name: clone-build-push
+  workspaces:
+  - name: shared-data
+    volumeClaimTemplate:
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+  params:
+  - name: repo-url
+    value: https://github.com/dp-auto/dp01-auto-src.git
+  - name: image-reference
+    value: registry.dev.svc.cluster.local:5000/dp-auto/dp01:0.0.1
