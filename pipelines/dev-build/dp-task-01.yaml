@@ -1,0 +1,14 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: dp-task-01
+spec:
+  workspaces:
+    - name: output
+      description: Holds Datapower source
+  steps:
+    - name: echo
+      image: alpine
+      script: |
+        #!/bin/sh
+        $(workspaces.output.path)/repo/pipelines/pipelines/scripts/dp-task-01.sh

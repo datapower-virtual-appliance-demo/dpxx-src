@@ -2,7 +2,6 @@ apiVersion: tekton.dev/v1beta1
 kind: TaskRun
 metadata:
   name: goodbye-task-run
-  namespace: dp01-ns
 spec:
   taskRef:
     name: goodbye
