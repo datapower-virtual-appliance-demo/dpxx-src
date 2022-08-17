@@ -1,11 +1,11 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: clone-build-push
+  name: dp-build-run
 spec:
   description: |
     This pipeline clones the datapower source repository builds an image with Kaniko and
-    pushes it to a registry
+    pushes it to a registry, and runs a user script.
   params:
   - name: repo-url
     type: string
@@ -23,8 +23,24 @@ spec:
     params:
     - name: url
       value: $(params.repo-url)
-  - name: build-push
+    - name: subdirectory
+      value: repo/main
+  - name: fetch-source-1
     runAfter: ["fetch-source"]
+    taskRef:
+      name: git-clone
+    workspaces:
+    - name: output
+      workspace: shared-data
+    params:
+    - name: url
+      value: $(params.repo-url)
+    - name: revision
+      value: "pipelines"
+    - name: subdirectory
+      value: repo/pipelines
+  - name: build-push
+    runAfter: ["fetch-source-1"]
     taskRef:
       name: kaniko
     workspaces:
@@ -33,3 +49,12 @@ spec:
     params:
     - name: IMAGE
       value: $(params.image-reference)
+    - name: DOCKERFILE
+      value: $(workspaces.source.path)/repo/main/Dockerfile
+  - name: run-dp-task-01
+    runAfter: ["build-push"]
+    taskRef:
+      name: dp-task-01
+    workspaces:
+    - name: output
+      workspace: shared-data

@@ -2,11 +2,10 @@ apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   name: goodbye
-  namespace: dp01-ns
 spec:
   steps:
     - name: goodbye
-      image: ubuntu
+      image: alpine
       script: |
-        #!/bin/bash
+        #!/bin/sh
         echo "Goodbye World!"
