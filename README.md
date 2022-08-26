@@ -7,6 +7,11 @@ DataPower gateway to OpenShift Kubernetes.
 
 ![diagram1](./docs/images/diagram1.drawio.png)
 
+## Comments
+
+- The following works on OpenShift and minikube
+- Need to move from Kaniko to Buildah
+
 ## Tutorial steps (outline pt I)
 
 - Fork repository from Template (all branches) e.g. mygituser/dp01src
@@ -20,6 +25,7 @@ DataPower gateway to OpenShift Kubernetes.
   - dp01-ns
 - install Tekton 
   - operator hub or CLI (minikube)?  
+  - (manual Tekton install: kubectl apply -f https://storage.googleapis.com/tekton-releases/pipeline/previous/v0.16.3/release.yaml)
   - (manual approval)
 - install sample hello-world task
   - `oc apply -f hello-world.yaml`
@@ -70,3 +76,6 @@ DataPower gateway to OpenShift Kubernetes.
   - `√ dev-build % tkn pipelinerun logs dp-build-run-dfwrg`       
   - `Pipeline still running ...`  
   - (include tkn pipelinerun log output)
+- Fails in Kaniko step
+  - Need to swap to `Buildah`
+
