@@ -4,13 +4,15 @@ metadata:
   name: dp-build-run
 spec:
   description: |
-    This pipeline clones the datapower source repository builds an image with Kaniko and
+    This pipeline clones the datapower source repository builds an image,
     pushes it to a registry, and runs a user script.
   params:
   - name: repo-url
     type: string
   - name: image-reference
     type: string
+  - name: tls-verify
+    type: string    
   workspaces:
   - name: shared-data
   tasks:
@@ -42,7 +44,7 @@ spec:
   - name: build-push
     runAfter: ["fetch-source-1"]
     taskRef:
-      name: kaniko
+      name: buildah
     workspaces:
     - name: source
       workspace: shared-data
@@ -51,6 +53,8 @@ spec:
       value: $(params.image-reference)
     - name: DOCKERFILE
       value: $(workspaces.source.path)/repo/main/Dockerfile
+    - name: TLSVERIFY
+      value: $(params.tls-verify)
   - name: run-dp-task-01
     runAfter: ["build-push"]
     taskRef:
