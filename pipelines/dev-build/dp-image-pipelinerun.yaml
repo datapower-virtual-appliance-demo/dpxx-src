@@ -3,7 +3,7 @@ kind: PipelineRun
 metadata:
   generateName: dp-build-run-
 spec:
-  serviceAccountName: pipeline
+#  serviceAccountName: pipeline
   pipelineRef:
     name: dp-build-run
   workspaces:
