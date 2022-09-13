@@ -45,7 +45,7 @@ spec:
     runAfter: ["fetch-source-1"]
     taskRef:
       name: buildah
-      kind: clusterTask
+ #     kind: clusterTask
     workspaces:
     - name: source
       workspace: shared-data
