@@ -12,7 +12,7 @@ spec:
   - name: image-reference
     type: string
   - name: tls-verify
-    type: string    
+    type: string
   workspaces:
   - name: shared-data
   tasks:
