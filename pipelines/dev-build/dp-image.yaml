@@ -9,7 +9,7 @@ metadata:
   labels:
     app.kubernetes.io/version: "0.5"
   name: buildah
-  namespace: default
+  namespace: dp01-ns
 spec:
   description: |-
     Buildah task builds source into a container image and then pushes it to a container registry.
@@ -68,8 +68,8 @@ spec:
         docker://$(params.IMAGE)
       cat /tmp/image-digest | tee $(results.IMAGE_DIGEST.path)
       echo "$(params.IMAGE)" | tee $(results.IMAGE_URL.path)
-    securityContext:
-      privileged: true
+#    securityContext:
+#      privileged: true
     volumeMounts:
     - mountPath: /var/lib/containers
       name: varlibcontainers
