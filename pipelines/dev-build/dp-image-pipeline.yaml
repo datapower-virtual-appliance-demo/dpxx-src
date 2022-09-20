@@ -13,6 +13,8 @@ spec:
     type: string
   - name: tls-verify
     type: string
+  - name: storage-driver
+    type: string
   workspaces:
   - name: shared-data
   tasks:
@@ -45,7 +47,7 @@ spec:
     runAfter: ["fetch-source-1"]
     taskRef:
       name: buildah
- #     kind: ClusterTask
+#      kind: ClusterTask
     workspaces:
     - name: source
       workspace: shared-data
@@ -56,6 +58,8 @@ spec:
       value: $(workspaces.source.path)/repo/main/Dockerfile
     - name: TLSVERIFY
       value: $(params.tls-verify)
+    - name: STORAGE_DRIVER
+      value: $(params.storage-driver)
   - name: run-dp-task-01
     runAfter: ["build-push"]
     taskRef:
