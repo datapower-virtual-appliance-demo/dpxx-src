@@ -7,7 +7,9 @@ spec:
     This pipeline clones the datapower source repository builds an image,
     pushes it to a registry, and runs a user script.
   params:
-  - name: repo-url
+  - name: source-repo-url
+    type: string
+  - name: ops-repo-url
     type: string
   - name: image-reference
     type: string
@@ -15,39 +17,67 @@ spec:
     type: string
   - name: storage-driver
     type: string
+  - name: git-user-name
+    type: string
+  - name: git-user-email
+    type: string
+  - name: git-script
+    type: string
   workspaces:
   - name: shared-data
+  - name: ssh-creds
   tasks:
-  - name: fetch-source
+  - name: fetch-source-repo-main
     taskRef:
       name: git-clone
     workspaces:
     - name: output
       workspace: shared-data
+    - name: ssh-directory
+      workspace: ssh-creds
     params:
     - name: url
-      value: $(params.repo-url)
+      value: $(params.source-repo-url)
+    - name: revision
+      value: "main"
     - name: subdirectory
       value: repo/main
-  - name: fetch-source-1
-    runAfter: ["fetch-source"]
+  - name: fetch-source-repo-pipelines
+    runAfter: ["fetch-source-repo-main"]
     taskRef:
       name: git-clone
     workspaces:
     - name: output
       workspace: shared-data
+    - name: ssh-directory
+      workspace: ssh-creds
     params:
     - name: url
-      value: $(params.repo-url)
+      value: $(params.source-repo-url)
     - name: revision
       value: "pipelines"
     - name: subdirectory
       value: repo/pipelines
+  - name: fetch-ops-repo-main
+    runAfter: ["fetch-source-repo-pipelines"]
+    taskRef:
+      name: git-clone
+    workspaces:
+    - name: output
+      workspace: shared-data
+    - name: ssh-directory
+      workspace: ssh-creds
+    params:
+    - name: url
+      value: $(params.ops-repo-url)
+    - name: revision
+      value: "main"
+    - name: subdirectory
+      value: repo/ops
   - name: build-push
-    runAfter: ["fetch-source-1"]
+    runAfter: ["fetch-ops-repo-main"]
     taskRef:
       name: buildah
-#      kind: ClusterTask
     workspaces:
     - name: source
       workspace: shared-data
@@ -67,3 +97,19 @@ spec:
     workspaces:
     - name: output
       workspace: shared-data
+  - name: git-push
+    runAfter: ["run-dp-task-01"]
+    taskRef:
+      name: git-cli
+    workspaces:
+    - name: source
+      workspace: shared-data
+    - name: ssh-directory
+      workspace: ssh-creds
+    params:
+    - name: GIT_USER_NAME
+      value: $(params.git-user-name)
+    - name: GIT_USER_EMAIL
+      value: $(params.git-user-email)
+    - name: GIT_SCRIPT
+      value: $(params.git-script)
