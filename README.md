@@ -87,6 +87,12 @@ oc apply -f dp-push.yaml
 oc apply -f dp-image-pipeline.yaml
 ```
 
+## Generate ssh keys for GitHub access
+
+```bash
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com" -f ./.ssh/id_rsa -q -N ""
+```
+
 ## Run pipeline
 
 ```bash
