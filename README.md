@@ -57,25 +57,38 @@ DataPower gateway to OpenShift Kubernetes.
 
 ## Tutorial (outline pt II)
 
-- Work on `dp-build` pipeline
-- Locate pipeline and tasks
-  - `cd /../dev-build`
-  - `ls`
-- Apply tasks and pipeliens
-  - `√ dev-build % oc apply -f dp-clone.yaml`
-  - `task.tekton.dev/git-clone created`
-  - `√ dev-build % oc apply -f dp-image.yaml`
-  - `task.tekton.dev/kaniko created`
-  - `?127 dev-build % oc apply -f dp-task-01.yaml`
-  - `task.tekton.dev/dp-task-01 created`
-  - `√ dev-build % oc apply -f dp-image-pipeline.yaml`
-  - `pipeline.tekton.dev/dp-build-run created`
-- Run pipeline
-  - `√ dev-build % oc create -f dp-image-pipelinerun.yaml`
-  - `pipelinerun.tekton.dev/dp-build-run-dfwrg created`
-  - `√ dev-build % tkn pipelinerun logs dp-build-run-dfwrg`       
-  - `Pipeline still running ...`  
-  - (include tkn pipelinerun log output)
-- Fails in Kaniko step
-  - Need to swap to `Buildah`
+Work on `dp-build` pipeline
 
+## Locate pipeline and tasks
+```bash
+cd /../dev-build
+ls
+```
+
+## Apply tasks and pipeliens
+  
+```bash  
+oc apply -f dp-clone.yaml
+```
+
+```bash
+oc apply -f dp-image.yaml
+```
+
+```bash
+oc apply -f dp-task-01.yaml
+```
+
+```bash
+oc apply -f dp-image-pipeline.yaml
+```
+
+## Run pipeline
+
+```bash
+oc create -f dp-image-pipelinerun.yaml
+```
+
+```bash
+tkn pipelinerun logs dp-build-run-dfwrg
+```
