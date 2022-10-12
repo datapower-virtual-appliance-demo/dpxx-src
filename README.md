@@ -93,6 +93,18 @@ oc apply -f dp-image-pipeline.yaml
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com" -f ./.ssh/id_rsa -q -N ""
 ```
 
+```bash
+ssh-keyscan -t rsa github.com | tee github-key-temp | ssh-keygen -lf - > ./.ssh/known_hosts
+```
+
+```bash
+oc create secret generic my-ssh-credentials -n dp01-dev --from-file=id_rsa=./.ssh/id_rsa --from-file=known_hosts=./.ssh/known_hosts --from-file=./.ssh/config --dry-run=client -o=yaml
+```
+
+```bash
+oc create secret generic my-ssh-credentials -n dp01-dev --from-file=id_rsa=./.ssh/id_rsa --from-file=known_hosts=./.ssh/known_hosts --from-file=./..ssh/config --dry-run=client > 
+```
+
 ## Run pipeline
 
 ```bash
