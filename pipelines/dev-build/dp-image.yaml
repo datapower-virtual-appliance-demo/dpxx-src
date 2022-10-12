@@ -9,7 +9,7 @@ metadata:
   labels:
     app.kubernetes.io/version: "0.5"
   name: buildah
-  namespace: dp01-ns
+  namespace: dp01-dev
 spec:
   description: |-
     Buildah task builds source into a container image and then pushes it to a container registry.
