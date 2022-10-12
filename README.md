@@ -108,7 +108,7 @@ oc create secret generic my-ssh-credentials --from-file=id_rsa=./.ssh/id_rsa --f
 Note secret not created in namespace
 
 ```bash
-oc apply -f dp-git-credentials.yanl
+oc apply -f dp-git-credentials.yaml
 ```
 
 
