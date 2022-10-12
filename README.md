@@ -98,19 +98,12 @@ ssh-keyscan -t rsa github.com | ssh-keygen -lf - > ./.ssh/known_hosts
 ```
 
 ```bash
-oc create secret generic my-ssh-credentials --from-file=id_rsa=./.ssh/id_rsa --from-file=known_hosts=./.ssh/known_hosts --from-file=./.ssh/config --dry-run=client -o=yaml
+oc create secret generic dp01-ssh-credentials -n dp01-dev --from-file=id_rsa=./.ssh/id_rsa --from-file=known_hosts=./.ssh/known_hosts --from-file=./.ssh/config --dry-run=client -o=yaml
 ```
 
 ```bash
-oc create secret generic my-ssh-credentials --from-file=id_rsa=./.ssh/id_rsa --from-file=known_hosts=./.ssh/known_hosts --from-file=./.ssh/config --dry-run=client > dp-git-credentials.yaml
+oc create secret generic dp01-ssh-credentials -n dp01-dev --from-file=id_rsa=./.ssh/id_rsa --from-file=known_hosts=./.ssh/known_hosts --from-file=./.ssh/config --dry-run=client -o yaml > dp-git-credentials.yaml
 ```
-
-Note secret not created in namespace
-
-```bash
-oc apply -f dp-git-credentials.yaml -n dp01-dev
-```
-
 
 ## Run pipeline
 
