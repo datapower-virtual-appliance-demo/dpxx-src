@@ -105,6 +105,15 @@ oc create secret generic dp01-ssh-credentials -n dp01-dev --from-file=id_rsa=./.
 oc create secret generic dp01-ssh-credentials -n dp01-dev --from-file=id_rsa=./.ssh/id_rsa --from-file=known_hosts=./.ssh/known_hosts --from-file=./.ssh/config --dry-run=client -o yaml > dp-git-credentials.yaml
 ```
 
+### Path `pipeline` serviceaccount
+
+```bash
+oc patch serviceaccount pipeline \
+    --namespace dp01-dev \
+    --type merge \
+    --patch '{"secrets":[{"name":"dp01-ssh-credentials"}]}'
+```
+
 ## Run pipeline
 
 ```bash
