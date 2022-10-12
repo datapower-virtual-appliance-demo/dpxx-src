@@ -102,7 +102,7 @@ oc create secret generic my-ssh-credentials -n dp01-dev --from-file=id_rsa=./.ss
 ```
 
 ```bash
-oc create secret generic my-ssh-credentials -n dp01-dev --from-file=id_rsa=./.ssh/id_rsa --from-file=known_hosts=./.ssh/known_hosts --from-file=./..ssh/config --dry-run=client > 
+oc create secret generic my-ssh-credentials -n dp01-dev --from-file=id_rsa=./.ssh/id_rsa --from-file=known_hosts=./.ssh/known_hosts --from-file=./..ssh/config --dry-run=client > dp-git-credentials.yaml
 ```
 
 ## Run pipeline
