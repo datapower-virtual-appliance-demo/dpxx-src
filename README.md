@@ -80,6 +80,10 @@ oc apply -f dp-task-01.yaml
 ```
 
 ```bash
+oc apply -f dp-push.yaml
+```
+
+```bash
 oc apply -f dp-image-pipeline.yaml
 ```
 
