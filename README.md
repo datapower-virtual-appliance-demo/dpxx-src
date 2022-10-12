@@ -94,7 +94,7 @@ ssh-keygen -t rsa -b 4096 -C "your_email@example.com" -f ./.ssh/id_rsa -q -N ""
 ```
 
 ```bash
-ssh-keyscan -t rsa github.com | tee github-key-temp | ssh-keygen -lf - > ./.ssh/known_hosts
+ssh-keyscan -t rsa github.com | ssh-keygen -lf - > ./.ssh/known_hosts
 ```
 
 ```bash
