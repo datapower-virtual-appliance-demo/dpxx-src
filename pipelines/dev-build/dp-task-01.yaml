@@ -2,6 +2,7 @@ apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   name: dp-task-01
+  namespace: dp01-dev
 spec:
   workspaces:
     - name: output
