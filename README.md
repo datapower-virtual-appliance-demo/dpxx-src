@@ -137,12 +137,18 @@ https://github.com/settings/keys
 ![diagram2](./docs/images/diagram2.png)
 
 
+Copy public key to clipboard
+
 ```bash
 pbcopy < ./.ssh/id_rsa.pub
 ```
 
+* Add name
+* Paste key into box
+
 ![diagram3](./docs/images/diagram3.png)
 
+* Hit `Add SSH key` button
 
 ### Path `pipeline` serviceaccount
 
