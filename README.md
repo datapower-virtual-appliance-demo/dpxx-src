@@ -21,6 +21,11 @@ DataPower gateway to OpenShift Kubernetes.
 - Install kubernetes cluster
   - minikube, OCP options initally
 - kubectl login to cluster
+
+```bash
+oc login
+```
+
 - new namespace 
   - dp01-ns
 - install Tekton 
