@@ -115,7 +115,7 @@ ssh-keygen -t rsa -b 4096 -C "your_email@example.com" -f ./.ssh/id_rsa -q -N ""
 ```
 
 ```bash
-ssh-keyscan -t rsa github.com | ssh-keygen -lf - > ./.ssh/known_hosts
+ssh-keyscan -t rsa github.com | tee ./.ssh/github-key-temp | ssh-keygen -lf - && cat ./.ssh/github-key-temp >> ./.ssh/known_hosts
 ```
 
 ```bash
@@ -124,6 +124,10 @@ oc create secret generic dp01-ssh-credentials -n dp01-dev --from-file=id_rsa=./.
 
 ```bash
 oc create secret generic dp01-ssh-credentials -n dp01-dev --from-file=id_rsa=./.ssh/id_rsa --from-file=known_hosts=./.ssh/known_hosts --from-file=./.ssh/config --dry-run=client -o yaml > dp-git-credentials.yaml
+```
+
+```bash
+oc apply -f dp-git-credentials.yaml
 ```
 
 ## Copy ssh credential into Github
