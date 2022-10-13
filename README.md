@@ -126,6 +126,24 @@ oc create secret generic dp01-ssh-credentials -n dp01-dev --from-file=id_rsa=./.
 oc create secret generic dp01-ssh-credentials -n dp01-dev --from-file=id_rsa=./.ssh/id_rsa --from-file=known_hosts=./.ssh/known_hosts --from-file=./.ssh/config --dry-run=client -o yaml > dp-git-credentials.yaml
 ```
 
+## Copy ssh credential into Github
+
+Need to add ssh public key to GitHub to authorise access:
+
+```bash
+https://github.com/settings/keys
+```
+
+![](./docs/images/diagram003.png)
+
+
+```bash
+pbcopy < ./.ssh/id_rsa.pub
+```
+
+![](./docs/images/diagram004.png)
+
+
 ### Path `pipeline` serviceaccount
 
 ```bash
