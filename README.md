@@ -26,8 +26,14 @@ DataPower gateway to OpenShift Kubernetes.
 oc login
 ```
 
-- new namespace 
-  - dp01-ns
+## Work in new namespace 
+
+Open Terminal
+
+```bash
+oc namespace dp01-ns
+```
+
 - install Tekton 
   - operator hub or CLI (minikube)?  
   - (manual Tekton install: kubectl apply -f https://storage.googleapis.com/tekton-releases/pipeline/previous/v0.16.3/release.yaml)
@@ -63,6 +69,16 @@ oc login
 ## Tutorial (outline pt II)
 
 Work on `dp-build` pipeline
+
+## Work in dp01-dev namespace
+
+Open a new terminal window
+ 
+Navigate to folder
+
+```bash
+cd $git/dp01-src
+```
 
 ## Locate pipeline and tasks
 ```bash
@@ -126,5 +142,5 @@ oc create -f dp-image-pipelinerun.yaml
 ```
 
 ```bash
-tkn pipelinerun logs dp-build-run-dfwrg
+tkn pipelinerun logs dp-build-run-dfwrg -n dp01-dev
 ```
