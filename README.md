@@ -134,14 +134,14 @@ Need to add ssh public key to GitHub to authorise access:
 https://github.com/settings/keys
 ```
 
-![](./docs/images/diagram2.png)
+![diagram2](./docs/images/diagram2.png)
 
 
 ```bash
 pbcopy < ./.ssh/id_rsa.pub
 ```
 
-![](./docs/images/diagram3.png)
+![diagram3](./docs/images/diagram3.png)
 
 
 ### Path `pipeline` serviceaccount
