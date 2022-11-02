@@ -21,7 +21,9 @@ This tutorial will walk you through the process of setting up this configuration
 
 ## Tutorial steps (outline pt I)
 
+## Install Kubernetes
 
+Cover Minikube OCP options -->links
 
 ## Fork repository
 [Fork this repository](https://github.com/dp-auto/dpxx-src/generate) from a `Template`. 
@@ -50,20 +52,6 @@ git clone git@github.com:$GITUSER/dp01src.git
 cd dp01src
 git checkout pipelines
 ```
-
-## Navigate to folder
-
-```bash
-mkdir -p $HOME/git/dp01-src
-cd $HOME/git/dp01-src
-```
-
-## Install kubernetes cluster
-
-- Minikube, OCP options -->links
-
-## Work in new namespace 
-
 
 ## Login to cluster
 
