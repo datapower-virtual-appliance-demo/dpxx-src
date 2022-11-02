@@ -224,6 +224,13 @@ oc patch serviceaccount pipeline \
 oc create -f dp-image-pipelinerun.yaml
 ```
 
+In the following command replace `xxxxx` with the new pipeline run identifier:
+
 ```bash
-tkn pipelinerun logs dp-build-run-dfwrg -n dp01-dev
+tkn pipelinerun logs dp-build-run-xxxxx -n dp01-dev -f
 ```
+
+## View pipelinerun in the web console
+
+
+
