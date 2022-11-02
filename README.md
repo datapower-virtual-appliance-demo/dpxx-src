@@ -19,16 +19,27 @@ Notice how:
 
 This tutorial will walk you through the process of setting up this configuration.
 
-## Tutorial steps (outline pt I)
+---
 
 ## Install Kubernetes
 
 Cover Minikube OCP options -->links
 
+---
+
+## install Tekton 
+  - operator hub or CLI (minikube)?  
+  - (manual Tekton install: kubectl apply -f https://storage.googleapis.com/tekton-releases/pipeline/previous/v0.16.3/release.yaml)
+  - (manual approval)
+
+---
+
 ## Fork repository
 [Fork this repository](https://github.com/dp-auto/dpxx-src/generate) from a `Template`. 
   - Ensure you include all branches by tickinging `Include all branches`. 
   - Fork the respository to **your Git user** e.g. `<mygituser>/dp01src`
+
+---
 
 ## Clone repository to your local machine
 
@@ -46,6 +57,8 @@ cd $HOME/git/datapower
 git clone git@github.com:$GITUSER/dp01src.git
 ```
 
+---
+
 ## Work on pipelines
 
 ```bash
@@ -53,47 +66,55 @@ cd dp01src
 git checkout pipelines
 ```
 
+---
+
 ## Login to cluster
 
 ```bash
 oc login
 ```
 
-## Create namespace to work in
+---
+
+## Create namespace for dp01
 
 ```bash
-oc namespace dp01-ns
+oc create namespace dp01-dev
 ```
 
-## install Tekton 
-  - operator hub or CLI (minikube)?  
-  - (manual Tekton install: kubectl apply -f https://storage.googleapis.com/tekton-releases/pipeline/previous/v0.16.3/release.yaml)
-  - (manual approval)
-
+---
 
 ## install sample hello-world task
   - `oc apply -f hello-world.yaml`
   - `task.tekton.dev/hello created`
 
+---
 
 ## run sample task
   - `oc create -f hello-world-run.yaml`
   - `taskrun.tekton.dev/hello-task-run-v8q99 created` (e.g.)
 
+---
+
 ## view task log
   - `tkn taskrun logs hello-task-run-v8q99`
   - `[echo] Hello World`
 
+---
 
 ## review task
   - (brief walk through of YAMLs)
   - explore in console (optional for openshift) 
+
+---
 
 ## Set up pipeline
   - `√ sample % oc apply -f goodbye-world.yaml`
   - `task.tekton.dev/goodbye created`
   - `√ sample % oc apply -f hello-goodbye-pipeline.yaml`
   - `pipeline.tekton.dev/hello-goodbye created`
+
+---
 
 ## run sample pipeline
   - `√ sample % oc create  -f hello-goodbye-pipeline-run.yaml`
@@ -103,21 +124,18 @@ oc namespace dp01-ns
   - `[hello : echo] Hello World`
   - `[goodbye : goodbye] Goodbye World!`
 
+---
+
 ## review pipeline
   - (brief walk through of YAMLs) 
   - explore in console (optional for openshift) 
 
-## Tutorial (outline pt II)
+---
 
-Work on `dp-build` pipeline
+## Locate Datapower pipeline
 
-## Work in dp01-dev namespace
-
-Open a new terminal window
- 
-## Locate pipeline and tasks
 ```bash
-cd /../dev-build
+cd $HOME/git/datapower/dp01-src/dev-build
 ls
 ```
 
