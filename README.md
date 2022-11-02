@@ -200,7 +200,9 @@ Copy public key to clipboard
 pbcopy < ./.ssh/id_rsa.pub
 ```
 
-* Add name
+Click on `New SSH Key`
+
+* Add name `dp01 SSH key`
 * Paste key into box
 
 ![diagram3](./docs/images/diagram3.png)
