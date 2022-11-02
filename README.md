@@ -48,7 +48,7 @@ git clone git@github.com:$GITUSER/dp01src.git
 
 ```bash
 cd dp01src
-git checkout pipelines branch
+git checkout pipelines
 ```
 
 ## Navigate to folder
