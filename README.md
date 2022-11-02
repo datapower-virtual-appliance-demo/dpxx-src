@@ -132,14 +132,14 @@ oc create namespace dp01-dev
 
 ---
 
-## Locate Datapower pipeline
+## Locate Datapower pipeline source
 
 ```bash
-cd $HOME/git/datapower/dp01-src/dev-build
+cd $HOME/git/datapower/dp01-src/pipelines/dev-build
 ls
 ```
 
-## Apply tasks and pipeliens
+## Create cluster pipeline resources
   
 ```bash  
 oc apply -f dp-clone.yaml
