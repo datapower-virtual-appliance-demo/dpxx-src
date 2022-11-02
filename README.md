@@ -5,12 +5,19 @@ DataPower gateway to OpenShift Kubernetes.
 
 ## Overview
 
+The following diagram shows a GitOps CICD pipeline for DataPower.
+
 ![diagram1](./docs/images/diagram1.drawio.png)
 
-## Comments
+Notice how: 
 
-- The following works on OpenShift and minikube
-- Need to move from Kaniko to Buildah
+- The git repository `dp01-src` holds the source configuration for the DataPower `dp01`
+- This repository also holds the source for a multi-protocol gateway
+- A Tekton pipeline usese the source repository to build, package, test, version and deliver changes to the `dp01` component.
+- If the pipeline is successful, then the YAMLs that define `dp01` are stored in the operational repository `dp01-ops`. The container image for `dp01` is stored in an image registry.
+- Shortly after the changes are committed to the git repository, an ArgoCD application detects the updated YAMLs. It applies them to the cluster to update the running `dp01`
+
+This tutorial will walk you through the process of setting up this configuration.
 
 ## Tutorial steps (outline pt I)
 
