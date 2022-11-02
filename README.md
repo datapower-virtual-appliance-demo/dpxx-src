@@ -37,7 +37,7 @@ Cover Minikube OCP options -->links
 ## Fork repository
 [Fork this repository](https://github.com/dp-auto/dpxx-src/generate) from a `Template`. 
   - Ensure you include all branches by tickinging `Include all branches`. 
-  - Fork the respository to **your Git user** e.g. `<mygituser>/dp01src`
+  - Fork the respository to **your Git user** e.g. `<mygituser>/dp01-src`
 
 ---
 
@@ -54,7 +54,7 @@ export GITUSER=odowdaibm
 ```bash
 mkdir -p $HOME/git/datapower
 cd $HOME/git/datapower
-git clone git@github.com:$GITUSER/dp01src.git
+git clone git@github.com:$GITUSER/dp01-src.git
 ```
 
 ---
@@ -62,7 +62,7 @@ git clone git@github.com:$GITUSER/dp01src.git
 ## Work on pipelines
 
 ```bash
-cd dp01src
+cd dp01-src
 git checkout pipelines
 ```
 
