@@ -32,10 +32,10 @@ This tutorial will walk you through the process of setting up this configuration
 
 Open new Terminal
 
-Set userid
+Set userid, to your userid, e.g. `odowdaibm`
 
 ```bash
-export $GITUSER=odowdaibm
+export GITUSER=odowdaibm
 ```
 
 ```bash
