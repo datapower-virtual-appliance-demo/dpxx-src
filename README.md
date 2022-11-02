@@ -21,9 +21,11 @@ This tutorial will walk you through the process of setting up this configuration
 
 ## Tutorial steps (outline pt I)
 
-- Fork repository from Template (all branches) e.g. mygituser/dp01src
+- [Fork this repository](https://github.com/dp-auto/dpxx-src/generate) from a `Template`. 
+  - Ensure you include all branches. 
+  - Fork the respository to **your Git user** e.g. `<mygituser>/dp01src`
 - `git clone` dp01src to local machine
-- cd to dp01src repo
+- cd to `dp01src` repo
 - `git checkout pipelines` branch
 - Install kubernetes cluster
   - minikube, OCP options initally
