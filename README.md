@@ -209,7 +209,7 @@ Click on `New SSH Key`
 
 * Hit `Add SSH key` button
 
-### Path `pipeline` serviceaccount
+## Patch `pipeline` serviceaccount
 
 ```bash
 oc patch serviceaccount pipeline \
@@ -217,6 +217,14 @@ oc patch serviceaccount pipeline \
     --type merge \
     --patch '{"secrets":[{"name":"dp01-ssh-credentials"}]}'
 ```
+
+## Create dp01-ops repository
+
+We're almost ready to run the pipeline. When it runns, it will place its output in the `dp01-ops` repository.
+
+Follow [these instructions](https://github.com/dp-auto/dpxx-ops/blob/main/README.md) to create the `dp01-ops` repository.
+
+When you have completed this task, proceed to the [next step](##run-pipeline) in this tutorial.
 
 ## Run pipeline
 
