@@ -23,7 +23,7 @@ This tutorial will walk you through the process of setting up this configuration
 
 ## Fork repository
 [Fork this repository](https://github.com/dp-auto/dpxx-src/generate) from a `Template`. 
-  - Ensure you include all branches by tickinging `Include all branches`. 
+  - Ensure you include all branches by ticking `Include all branches`. 
   - Fork the respository to **your Git user** e.g. `<mygituser>/dp01-src`
 
 ---
