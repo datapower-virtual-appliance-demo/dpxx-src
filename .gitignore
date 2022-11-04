@@ -1,3 +1,2 @@
 .DS_Store
-pipelines/dev-build/.ssh/*
-pipelines/dev-build/dp-git-credentials.yaml
+
