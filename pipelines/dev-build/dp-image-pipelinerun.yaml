@@ -50,20 +50,20 @@ spec:
       cd $(workspaces.source.path)/repo/main
 
       # Create datapower admin password; encode as a secret
-      kubectl create secret generic admin-secret --from-literal=KEY=passw0rd --dry-run=client -o yaml > admin-secret.yaml
+      kubectl create secret generic admin-secret -n dp01-dev --from-literal=KEY=passw0rd --dry-run=client -o yaml > admin-secret.yaml
 
       # Create configmaps containing datapower config and local
-      kubectl create configmap booking-service-config --from-file=$(workspaces.source.path)/repo/main/config/BookingServiceBackend.cfg --dry-run=client -o yaml > booking-service-config.yaml
+      kubectl create configmap booking-service-config -n dp01-dev --from-file=$(workspaces.source.path)/repo/main/config/BookingServiceBackend.cfg --dry-run=client -o yaml > booking-service-config.yaml
       tar --directory=$(workspaces.source.path)/repo/main/local/BookingServiceBackend -czvf BookingServiceBackend.tar.gz .
-      kubectl create configmap booking-service-local --from-file=BookingServiceBackend.tar.gz --dry-run=client -o yaml > booking-service-local.yaml
+      kubectl create configmap booking-service-local -n dp01-dev --from-file=BookingServiceBackend.tar.gz --dry-run=client -o yaml > booking-service-local.yaml
 
       # Create key used by Booking service MPGW; encode as secrets
       openssl req -x509 -newkey rsa:4096 -keyout Alice-privkey.pem -out Alice-sscert.pem -sha256 -days 365 -nodes -subj '/CN=dummy.domain.com'
-      kubectl create secret generic booking-service-secret1 --from-file=Alice-sscert.pem --from-file=Alice-privkey.pem --dry-run=client -o yaml > booking-service-secret1.yaml
+      kubectl create secret generic booking-service-secret1 -n dp01-dev --from-file=Alice-sscert.pem --from-file=Alice-privkey.pem --dry-run=client -o yaml > booking-service-secret1.yaml
       openssl req -x509 -newkey rsa:4096 -keyout BookingApplication-privkey.pem -out BookingApplication-sscert.pem -sha256 -days 365 -nodes -subj '/CN=dummy.domain.com'
-      kubectl create secret generic booking-service-secret2 --from-file=BookingApplication-privkey.pem --from-file=BookingApplication-sscert.pem --dry-run=client -o yaml > booking-service-secret2.yaml
+      kubectl create secret generic booking-service-secret2 -n dp01-dev --from-file=BookingApplication-privkey.pem --from-file=BookingApplication-sscert.pem --dry-run=client -o yaml > booking-service-secret2.yaml
       openssl enc -aes-256-cbc -pbkdf2 -k secret -P -md sha1 | sed -n "/key/ s/key=//p" > aes256-sharesecret-1.txt
-      kubectl create secret generic booking-service-secret3 --from-file=aes256-sharesecret-1.txt --dry-run=client -o yaml > booking-service-secret3.yaml
+      kubectl create secret generic booking-service-secret3 -n dp01-dev --from-file=aes256-sharesecret-1.txt --dry-run=client -o yaml > booking-service-secret3.yaml
 
       # Copy generated kubernetes artefacts to datapower gitops repo
       cp booking-service-local.yaml $(workspaces.source.path)/repo/ops/environments/dev/dp01/.
