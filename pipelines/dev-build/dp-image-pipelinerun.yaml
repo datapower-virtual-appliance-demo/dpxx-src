@@ -65,6 +65,12 @@ spec:
       openssl enc -aes-256-cbc -pbkdf2 -k secret -P -md sha1 | sed -n "/key/ s/key=//p" > aes256-sharesecret-1.txt
       kubectl create secret generic booking-service-secret3 -n dp01-dev --from-file=aes256-sharesecret-1.txt --dry-run=client -o yaml > booking-service-secret3.yaml
 
+      # Copy fixed YAMLs to datapower gitops repo
+      cp yaml/gateway.yaml $(workspaces.source.path)/repo/ops/environments/dev/dp01/.
+      cp yaml/booking-service-ingress.yaml $(workspaces.source.path)/repo/ops/environments/dev/dp01/.
+      cp yaml/booking-service-service.yaml $(workspaces.source.path)/repo/ops/environments/dev/dp01/.
+      cp yaml/gateway-webui-service.yaml $(workspaces.source.path)/repo/ops/environments/dev/dp01/.
+
       # Copy generated kubernetes artefacts to datapower gitops repo
       cp booking-service-local.yaml $(workspaces.source.path)/repo/ops/environments/dev/dp01/.
       cp booking-service-config.yaml $(workspaces.source.path)/repo/ops/environments/dev/dp01/.
