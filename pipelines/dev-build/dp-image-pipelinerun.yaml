@@ -53,8 +53,8 @@ spec:
       kubectl create secret generic admin-secret -n dp01-dev --from-literal=KEY=passw0rd --dry-run=client -o yaml > admin-secret.yaml
 
       # Create configmaps containing datapower config and local
-      kubectl create configmap booking-service-config -n dp01-dev --from-file=$(workspaces.source.path)/repo/main/config/BookingServiceBackend.cfg --dry-run=client -o yaml > booking-service-config.yaml
-      tar --directory=$(workspaces.source.path)/repo/main/local/BookingServiceBackend -czvf BookingServiceBackend.tar.gz .
+      kubectl create configmap booking-service-config -n dp01-dev --from-file=$(workspaces.source.path)/repo/main/gateways/gateway01/config/BookingServiceBackend.cfg --dry-run=client -o yaml > booking-service-config.yaml
+      tar --directory=$(workspaces.source.path)/repo/main/gateways/gateway01/local/BookingServiceBackend -czvf BookingServiceBackend.tar.gz .
       kubectl create configmap booking-service-local -n dp01-dev --from-file=BookingServiceBackend.tar.gz --dry-run=client -o yaml > booking-service-local.yaml
 
       # Create key used by Booking service MPGW; encode as secrets
@@ -66,17 +66,20 @@ spec:
       kubectl create secret generic booking-service-secret3 -n dp01-dev --from-file=aes256-sharesecret-1.txt --dry-run=client -o yaml > booking-service-secret3.yaml
 
       # Copy fixed YAMLs to datapower gitops repo
-      cp gateways/gateway01/gateway.yaml $(workspaces.source.path)/repo/ops/environments/dev/dp01/.
-      cp gateways/gateway01/booking-service-ingress.yaml $(workspaces.source.path)/repo/ops/environments/dev/dp01/.
-      cp gateways/gateway01/booking-service-service.yaml $(workspaces.source.path)/repo/ops/environments/dev/dp01/.
-      cp gateways/gateway01/gateway-webui-service.yaml $(workspaces.source.path)/repo/ops/environments/dev/dp01/.
+      mkdir -p $(workspaces.source.path)/repo/ops/environments/dev/dp01/gateway01
+      cp gateways/gateway01/gateway.yaml $(workspaces.source.path)/repo/ops/environments/dev/dp01/gateway01/.
+      cp gateways/gateway01/booking-service-ingress.yaml $(workspaces.source.path)/repo/ops/environments/dev/dp01/gateway01/.
+      cp gateways/gateway01/booking-service-service.yaml $(workspaces.source.path)/repo/ops/environments/dev/dp01/gateway01/.
+      cp gateways/gateway01/gateway-webui-service.yaml $(workspaces.source.path)/repo/ops/environments/dev/dp01/gateway01/.
 
       # Copy generated kubernetes artefacts to datapower gitops repo
-      cp booking-service-local.yaml $(workspaces.source.path)/repo/ops/environments/dev/dp01/.
-      cp booking-service-config.yaml $(workspaces.source.path)/repo/ops/environments/dev/dp01/.
-      cp booking-service-secret1.yaml $(workspaces.source.path)/repo/ops/environments/dev/dp01/.
-      cp booking-service-secret2.yaml $(workspaces.source.path)/repo/ops/environments/dev/dp01/.
-      cp booking-service-secret3.yaml $(workspaces.source.path)/repo/ops/environments/dev/dp01/.
+      cp booking-service-local.yaml $(workspaces.source.path)/repo/ops/environments/dev/dp01/gateway01/.
+      cp booking-service-config.yaml $(workspaces.source.path)/repo/ops/environments/dev/dp01/gateway01/.
+      cp booking-service-secret1.yaml $(workspaces.source.path)/repo/ops/environments/dev/dp01/gateway01/.
+      cp booking-service-secret2.yaml $(workspaces.source.path)/repo/ops/environments/dev/dp01/gateway01/.
+      cp booking-service-secret3.yaml $(workspaces.source.path)/repo/ops/environments/dev/dp01/gateway01/.
+
+      # Admin secret applies to virtual appliance
       cp admin-secret.yaml $(workspaces.source.path)/repo/ops/environments/dev/dp01/.
 
       # Push changes to GitHub
