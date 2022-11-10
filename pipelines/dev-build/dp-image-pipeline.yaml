@@ -43,24 +43,8 @@ spec:
       value: "main"
     - name: subdirectory
       value: repo/main
-  - name: fetch-source-repo-pipelines
-    runAfter: ["fetch-source-repo-main"]
-    taskRef:
-      name: git-clone
-    workspaces:
-    - name: output
-      workspace: shared-data
-    - name: ssh-directory
-      workspace: ssh-creds
-    params:
-    - name: url
-      value: $(params.source-repo-url)
-    - name: revision
-      value: "pipelines"
-    - name: subdirectory
-      value: repo/pipelines
   - name: fetch-ops-repo-main
-    runAfter: ["fetch-source-repo-pipelines"]
+    runAfter: ["fetch-source-repo-main"]
     taskRef:
       name: git-clone
     workspaces:
@@ -91,15 +75,8 @@ spec:
       value: $(params.tls-verify)
     - name: STORAGE_DRIVER
       value: $(params.storage-driver)
-  - name: run-dp-task-01
-    runAfter: ["build-push"]
-    taskRef:
-      name: dp-task-01
-    workspaces:
-    - name: output
-      workspace: shared-data
   - name: git-push
-    runAfter: ["run-dp-task-01"]
+    runAfter: ["build-push"]
     taskRef:
       name: git-cli
     workspaces:
