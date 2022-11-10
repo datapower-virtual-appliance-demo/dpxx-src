@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: dp-build-run
+  name: dp-dev-pipeline
   namespace: dp01-dev
 spec:
   description: |
@@ -28,7 +28,7 @@ spec:
   - name: shared-data
   - name: ssh-creds
   tasks:
-  - name: fetch-source-repo-main
+  - name: clone-source
     taskRef:
       name: git-clone
     workspaces:
@@ -43,24 +43,8 @@ spec:
       value: "main"
     - name: subdirectory
       value: repo/main
-  - name: fetch-ops-repo-main
-    runAfter: ["fetch-source-repo-main"]
-    taskRef:
-      name: git-clone
-    workspaces:
-    - name: output
-      workspace: shared-data
-    - name: ssh-directory
-      workspace: ssh-creds
-    params:
-    - name: url
-      value: $(params.ops-repo-url)
-    - name: revision
-      value: "main"
-    - name: subdirectory
-      value: repo/ops
-  - name: build-push
-    runAfter: ["fetch-ops-repo-main"]
+  - name: build-image
+    runAfter: ["clone-source"]
     taskRef:
       name: buildah
     workspaces:
@@ -75,8 +59,48 @@ spec:
       value: $(params.tls-verify)
     - name: STORAGE_DRIVER
       value: $(params.storage-driver)
-  - name: git-push
-    runAfter: ["build-push"]
+  - name: gen-yamls
+    runAfter: ["build-image"]
+    taskRef:
+      name: dp-gen-yamls
+    workspaces:
+    - name: source
+      workspace: shared-data
+    params:
+  - name: test
+    runAfter: ["gen-yamls"]
+    taskRef:
+      name: dp-test
+    workspaces:
+    - name: source
+      workspace: shared-data
+    params:
+  - name: clone-ops
+    runAfter: ["test"]
+    taskRef:
+      name: git-clone
+    workspaces:
+    - name: output
+      workspace: shared-data
+    - name: ssh-directory
+      workspace: ssh-creds
+    params:
+    - name: url
+      value: $(params.ops-repo-url)
+    - name: revision
+      value: "main"
+    - name: subdirectory
+      value: repo/ops
+  - name: store-yamls
+    runAfter: ["clone-ops"]
+    taskRef:
+      name: dp-store-yamls
+    workspaces:
+    - name: source
+      workspace: shared-data
+    params:
+  - name: push-yamls
+    runAfter: ["store-yamls"]
     taskRef:
       name: git-cli
     workspaces:
