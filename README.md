@@ -63,54 +63,6 @@ oc login
 
 ---
 
-## install sample hello-world task
-  - `oc apply -f hello-world.yaml`
-  - `task.tekton.dev/hello created`
-
----
-
-## run sample task
-  - `oc create -f hello-world-run.yaml`
-  - `taskrun.tekton.dev/hello-task-run-v8q99 created` (e.g.)
-
----
-
-## view task log
-  - `tkn taskrun logs hello-task-run-v8q99`
-  - `[echo] Hello World`
-
----
-
-## review task
-  - (brief walk through of YAMLs)
-  - explore in console (optional for openshift) 
-
----
-
-## Set up pipeline
-  - `√ sample % oc apply -f goodbye-world.yaml`
-  - `task.tekton.dev/goodbye created`
-  - `√ sample % oc apply -f hello-goodbye-pipeline.yaml`
-  - `pipeline.tekton.dev/hello-goodbye created`
-
----
-
-## run sample pipeline
-  - `√ sample % oc create  -f hello-goodbye-pipeline-run.yaml`
-  - `pipelinerun.tekton.dev/hello-goodbye-run-v5wmb created`
-  - `√ sample % tkn pipelinerun logs hello-goodbye-run-v5wmb`
-  - `Pipeline still running ...`
-  - `[hello : echo] Hello World`
-  - `[goodbye : goodbye] Goodbye World!`
-
----
-
-## review pipeline
-  - (brief walk through of YAMLs) 
-  - explore in console (optional for openshift) 
-
----
-
 ## Locate Datapower pipeline source
 
 ```bash
@@ -123,23 +75,15 @@ ls
 ## Create cluster pipeline resources
   
 ```bash  
-oc apply -f dp-clone.yaml
-```
-
-```bash
-oc apply -f dp-image.yaml
-```
-
-```bash
-oc apply -f dp-task-01.yaml
-```
-
-```bash
+oc apply -f dp-clone.yaml		
+oc apply -f dp-gen-yamls.yaml	
 oc apply -f dp-push.yaml
-```
-
-```bash
-oc apply -f dp-image-pipeline.yaml
+oc apply -f dp-dev-pipeline.yaml	
+oc apply -f dp-git-credentials.yaml	
+oc apply -f dp-store-yamls.yaml
+oc apply -f dp-dev-pipelinerun.yaml	
+oc apply -f dp-build-image.yaml		
+oc apply -f dp-test.yaml
 ```
 
 ---
@@ -157,13 +101,13 @@ When you have completed this task, proceed to the [next step](##run-pipeline) in
 ## Run pipeline
 
 ```bash
-oc create -f dp-image-pipelinerun.yaml
+oc create -f dp-dev-pipelinerun.yaml
 ```
 
 In the following command replace `xxxxx` with the new pipeline run identifier:
 
 ```bash
-tkn pipelinerun logs dp-build-run-xxxxx -n dp01-dev -f
+tkn pipelinerun logs dp-dev-pipeline-run-xxxxx -n dp01-dev -f
 ```
 
 ## View pipelinerun in the web console
