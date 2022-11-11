@@ -2,7 +2,7 @@ apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
   generateName: dp-dev-pipeline-run-
-  namespace: dp01-dev
+  namespace: dp01-ci
 spec:
   serviceAccountName: pipeline
   pipelineRef:
