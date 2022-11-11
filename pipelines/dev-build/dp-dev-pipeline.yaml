@@ -2,7 +2,7 @@ apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
   name: dp-dev-pipeline
-  namespace: dp01-dev
+  namespace: dp01-ci
 spec:
   description: |
     This pipeline clones the datapower source repository builds an image,
