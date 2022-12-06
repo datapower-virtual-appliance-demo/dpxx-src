@@ -17,7 +17,7 @@ At the end of this tutorial, you will have a solid foundation of GitOps and CICD
 
 ---
 
-## Overview
+## Introduction
 
 The following diagram shows a GitOps CICD pipeline for DataPower:
 
