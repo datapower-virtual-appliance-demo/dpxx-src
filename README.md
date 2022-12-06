@@ -33,7 +33,7 @@ Notice how:
 
 
 This tutorial will walk you through the process of setting up this configuration:
-- Step 1: Follow [these instructions](https://github.com/dp-auto/dpxx-src#readme) to set up your cluster, ArgoCD and the `dp01-ops` repository. When complete, proceed to step 2.
+- Step 1: Follow [these instructions](https://github.com/dp-auto/dpxx-ops#readme) to set up your cluster, ArgoCD and the `dp01-ops` repository. When complete, proceed to step 2.
 - Step 2: Continue with the instructions in this README to create the `dp01-src` respository, run a tekton pipeline to populate it, and interact with the new or updated DataPower appliance `dp01`.
 
 ---
