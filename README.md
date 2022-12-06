@@ -1,7 +1,21 @@
 # DataPower automation
 
-This repository can be used to automate the build, test and deploy of your
-DataPower gateway to OpenShift Kubernetes.
+## Overview
+
+This tutorial demonstrates how to do CICD with DataPower using GitOps on Kubernetes. 
+
+In this tutorial, you will:
+
+1. Create a Kubernetes cluster and image registry, if required.
+2. Install ArgoCD applications to manage cluster deployment of DataPower-related Kubernetes resources.
+3. Create an operational repository to store DataPower resources that are deployed to the Kubernetes cluster.
+4. Create a source Git repository to store the configuration and development artefacts for a virtual DataPower appliance.
+5. Run a Tekton pipleline to build, test, version and deliver the DataPower-related resources ready for deployment.
+6. Gain experience with the IBM-supplied DataPower operator and container.
+
+At the end of this tutorial, you will have a solid foundation of GitOps and CICD for DataPower in a Kubernetes environment.
+
+---
 
 ## Overview
 
