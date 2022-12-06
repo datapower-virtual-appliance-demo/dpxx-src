@@ -105,15 +105,6 @@ oc apply -f dp-test.yaml
 
 ---
 
-## Create dp01-ops repository
-
-We're almost ready to run the pipeline. When it runns, it will place its output in the `dp01-ops` repository.
-
-Follow [these instructions](https://github.com/dp-auto/dpxx-ops/blob/main/README.md) to create the `dp01-ops` repository.
-
-When you have completed this task, proceed to the [next step](##run-pipeline) in this tutorial.
-
----
 
 ## Run pipeline
 
