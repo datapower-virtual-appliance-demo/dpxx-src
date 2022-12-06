@@ -96,9 +96,7 @@ oc apply -f dp-clone.yaml
 oc apply -f dp-gen-yamls.yaml	
 oc apply -f dp-push.yaml
 oc apply -f dp-dev-pipeline.yaml	
-oc apply -f dp-git-credentials.yaml	
 oc apply -f dp-store-yamls.yaml
-oc apply -f dp-dev-pipelinerun.yaml	
 oc apply -f dp-build-image.yaml		
 oc apply -f dp-test.yaml
 ```
