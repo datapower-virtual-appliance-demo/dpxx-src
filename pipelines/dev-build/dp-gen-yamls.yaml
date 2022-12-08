@@ -35,7 +35,7 @@ spec:
         # Create configmaps containing datapower config and local
         kubectl create configmap booking-service-config -n dp01-dev --from-file=config/BookingServiceBackend.cfg --dry-run=client -o yaml > yamls/booking-service-config.yaml
         tar -czvf BookingServiceBackend.tar.gz  ./local/BookingServiceBackend
-        kubectl create configmap booking-service-local -n dp01-dev --from-file=gateways/gateway01/BookingServiceBackend.tar.gz --dry-run=client -o yaml > yamls/booking-service-local.yaml
+        kubectl create configmap booking-service-local -n dp01-dev --from-file=./BookingServiceBackend.tar.gz --dry-run=client -o yaml > yamls/booking-service-local.yaml
 
         # Create key used by Booking service MPGW; encode as secrets
         openssl req -x509 -newkey rsa:4096 -keyout Alice-privkey.pem -out Alice-sscert.pem -sha256 -days 365 -nodes -subj '/CN=dummy.domain.com'
