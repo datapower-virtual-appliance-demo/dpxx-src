@@ -55,7 +55,6 @@ spec:
   - image: $(params.BUILDER_IMAGE)
     name: build
     script: |
-      exit 0
       [[ "$(workspaces.sslcertdir.bound)" == "true" ]] && CERT_DIR_FLAG="--cert-dir $(workspaces.sslcertdir.path)"
       buildah ${CERT_DIR_FLAG} --storage-driver=$(params.STORAGE_DRIVER) bud \
         $(params.BUILD_EXTRA_ARGS) --format=$(params.FORMAT) \
