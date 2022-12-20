@@ -54,7 +54,7 @@ spec:
     - name: IMAGE
       value: $(params.image-reference)
     - name: DOCKERFILE
-      value: $(workspaces.source.path)/repo/main/Dockerfile
+      value: $(workspaces.source.path)/repo/main/domain/Dockerfile
     - name: TLSVERIFY
       value: $(params.tls-verify)
     - name: STORAGE_DRIVER
