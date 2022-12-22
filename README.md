@@ -264,6 +264,13 @@ oc apply -f dp-test.yaml
 
 ---
 
+## Customize pipeline
+
+```bash
+value: git@github.com:$GITORG/dp01-src.git
+value: git@github.com:$GITORG/dp01-ops.git
+```
+
 
 ## Run pipeline
 
