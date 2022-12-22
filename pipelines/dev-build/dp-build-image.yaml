@@ -23,7 +23,7 @@ spec:
   - default: overlay
     description: Set buildah storage driver
     name: STORAGE_DRIVER
-  - default: Dockerfile
+  - default: ./Dockerfile
     description: Path to the Dockerfile to build.
     name: DOCKERFILE
   - default: .
