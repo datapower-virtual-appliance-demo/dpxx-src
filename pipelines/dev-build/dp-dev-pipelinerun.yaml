@@ -21,10 +21,10 @@ spec:
       secretName: dp01-ssh-credentials
   params:
   - name: source-repo-url
-    value: git@github.com:dpauto/dpxx-src.git
+    value: git@github.com:$GITORG/dpxx-src.git
   - name: 
   - name: ops-repo-url
-    value: git@github.com:dpauto/dpxx-ops.git
+    value: git@github.com:$GITORG/dpxx-ops.git
   - name: image-reference
     #value: registry.dev.svc.cluster.local:5000/dp01-dev/dp01:0.0.1
     value: image-registry.openshift-image-registry.svc:5000/dp01-dev/dp01:0.0.1
