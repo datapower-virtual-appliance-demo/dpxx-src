@@ -22,7 +22,8 @@ spec:
   params:
   - name: source-repo-url
     value: git@github.com:$GITORG/dpxx-src.git
-  - name: 
+  - name: dockerfile
+    value: $(workspaces.source.path)/repo/main/domain/Dockerfile
   - name: ops-repo-url
     value: git@github.com:$GITORG/dpxx-ops.git
   - name: image-reference
