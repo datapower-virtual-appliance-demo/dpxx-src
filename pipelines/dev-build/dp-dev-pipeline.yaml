@@ -10,6 +10,8 @@ spec:
   params:
   - name: source-repo-url
     type: string
+  - name: dockerfile
+    type: string
   - name: ops-repo-url
     type: string
   - name: image-reference
