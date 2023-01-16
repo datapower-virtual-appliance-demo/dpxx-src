@@ -248,9 +248,13 @@ cd $HOME/git/datapower/dp01-src/pipelines/dev-build
 ls
 ```
 
+---
+
 ## Update ingress YAML
 
-The ingress used by the dp01 appliance needs to be customized for the cluster. The YAML is sourced from the `dp01-src` repository and looks like this:
+The ingress used by the dp01 appliance needs to be customized for the cluster. It would be better to do this customization at deployment time, as this is the point where we know which cluster to which we're going to deploy. To simplify the tutorial we do it now.
+
+The YAML is sourced from the `dp01-src` repository and looks like this:
 
 ```yaml
 
@@ -274,7 +278,33 @@ spec:
                   number: 12001
 ```
 
-Technically this should be done at deployment time, but to simplify the tutorial we do it here.
+Issue the following command to locate the ingress YAML used by your `dp01` appliance:
+
+```bash
+echo https://github.com/$GITORG/dp01-src/blob/main/gateways/gateway01/yamls/booking-service-ingress.yaml
+```
+
+It will return a URL, for example: 
+
+```bash
+https://github.com/dporg-odowdaibm2/dp01-src/blob/main/gateways/gateway01/yamls/booking-service-ingress.yaml
+```
+
+Copy this URL into your favourite browser.
+
+Edit the ingress YAML file, replacing the `<cluster sub-domain>` with the output from the following command:
+
+```bash
+oc get ingresscontrollers/default -n openshift-ingress-operator -o jsonpath='{.status.domain}'
+```
+
+which will look something like this:
+
+```bash
+datapower-cluster-1-d02cf90349a0fe46c9804e3ab1fe2643-0000.eu-gb.containers.appdomain.cloud
+```
+
+Commit this change to GitHub; this Ingress file will now be used for your `dp01` virtual appliance.
 
 ---
 
