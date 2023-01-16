@@ -286,5 +286,97 @@ tkn pipelinerun logs dp-dev-pipeline-run-xxxxx -n dp01-dev -f
 
 ## View pipelinerun in the web console
 
+## Update ingress
 
+When does this happen?
+
+    We have to have a YAML
+    This should be generated in the pipeline.
+
+## Try out service using API tool
+
+Now that the dp01 virtual appliance is running the BookingService, we can test it.
+
+You can use any API test tool; [RESTER](https://addons.mozilla.org/en-GB/firefox/addon/rester/) ois good if you use Firefox.
+
+Configure the tool to make the following API request:
+
+* **Method:** `POST`
+* **URL:** `booking-service-dp01-dev.<cluster-subnet>`
+* **Additional headers:** `Content-Type: application/xml`
+* **Payload:**
+   ```xml
+   <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:book="http://www.ibm.com/datapower/IBMAir/BookingService/">
+      <soapenv:Header/>
+      <soapenv:Body>
+         <book:BookingRequest>
+            <book:Booking>
+               <book:ReservationCode>IBM99V16I</book:ReservationCode>
+               <book:BookingType>I</book:BookingType>
+               <book:PaymentCardDetails>
+                  <book:Number>4485710246935191</book:Number>
+                  <book:Expiry>
+                     <book:Year>2017</book:Year>
+                     <book:Month>2</book:Month>
+                  </book:Expiry>
+                  <book:CVV>924</book:CVV>
+                  <book:Type>Visa</book:Type>
+                  <book:HolderName>James Roberts</book:HolderName>
+               </book:PaymentCardDetails>
+               <book:BillingDetails>
+                  <book:FirstName>James</book:FirstName>
+                  <book:LastName>Roberts</book:LastName>
+                  <book:Address>314 S. Wells St</book:Address>
+                  <book:City>Chicago</book:City>
+                  <book:State>IL</book:State>
+                  <book:ZIP>60606</book:ZIP>
+                  <book:Country>USA</book:Country>
+               </book:BillingDetails>
+            </book:Booking>
+         </book:BookingRequest>
+      </soapenv:Body>
+   </soapenv:Envelope>
+   ```
+
+The request should return `200 OK` with the following `Response`:
+
+   ```xml
+   ?xml version="1.0" encoding="UTF-8"?>
+   <soapenv:Envelope
+       xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+       xmlns:book="http://www.ibm.com/datapower/IBMAir/BookingService/">
+       <soapenv:Header/>
+       <soapenv:Body>
+           <!--Happy Path UC1-->
+           <book:BookingResponse>
+               <book:ConfirmationText>Processed 0112459898A</book:ConfirmationText>
+               <book:Booking>
+                   <book:ReservationCode>IBM99V16I</book:ReservationCode>
+                   <book:BookingType>I</book:BookingType>
+                   <book:PaymentCardDetails>
+                       <book:Number>************5191</book:Number>
+                       <book:Type>Visa</book:Type>
+                       <book:HolderName>James Roberts</book:HolderName>
+                   </book:PaymentCardDetails>
+                   <book:BillingDetails>
+                       <book:FirstName>James</book:FirstName>
+                       <book:LastName>Roberts</book:LastName>
+                       <book:Address>314 S. Wells St</book:Address>
+                       <book:City>Chicago</book:City>
+                       <book:State>IL</book:State>
+                       <book:ZIP>60606</book:ZIP>
+                       <book:Country>USA</book:Country>
+                   </book:BillingDetails>
+               </book:Booking>
+           </book:BookingResponse>
+       </soapenv:Body>
+   </soapenv:Envelope>
+   ```
+
+## Congratulations
+
+Well done! You have successfully completed this tutorial. You have
+
+* Configured a Kubernetes cluster for Platform Engineering including CICD and GitOps.
+* Built a DataPower virtual appliance, deployed a multi-protocol gateway and tested it.
 
