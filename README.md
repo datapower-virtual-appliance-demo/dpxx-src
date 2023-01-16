@@ -248,6 +248,34 @@ cd $HOME/git/datapower/dp01-src/pipelines/dev-build
 ls
 ```
 
+## Update ingress YAML
+
+The ingress used by the dp01 appliance needs to be customized for the cluster. The YAML is sourced from the `dp01-src` repository and looks like this:
+
+```yaml
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: booking-service
+  namespace: dp01-dev
+spec:
+  rules:
+    - host: booking-service-dp01-dev.<cluster sub-domain>
+# replace <cluster sub-domain> with output from: oc get ingresscontrollers/default -n openshift-ingress-operator -o jsonpath='{.status.domain}'
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: dp01-booking-service
+                port:
+                  number: 12001
+```
+
+Technically this should be done at deployment time, but to simplify the tutorial we do it here.
+
 ---
 
 ## Create cluster pipeline resources
@@ -286,12 +314,7 @@ tkn pipelinerun logs dp-dev-pipeline-run-xxxxx -n dp01-dev -f
 
 ## View pipelinerun in the web console
 
-## Update ingress
-
-When does this happen?
-
-    We have to have a YAML
-    This should be generated in the pipeline.
+Show progress in `tkn` command line tool?
 
 ## Try out service using API tool
 
