@@ -16,16 +16,16 @@ spec:
         resources:
           requests:
             storage: 1Gi
-  - name: ssh-creds
+  - name: git-creds
     secret:
-      secretName: dp01-ssh-credentials
+      secretName: dp01-git-credentials
   params:
   - name: source-repo-url
-    value: git@github.com:$GITORG/dpxx-src.git
+    value: https://github.com/$GITORG/dpxx-src.git
   - name: dockerfile
     value: $(workspaces.source.path)/repo/main/domain/Dockerfile
   - name: ops-repo-url
-    value: git@github.com:$GITORG/dpxx-ops.git
+    value: https://github.com/$GITORG/dpxx-ops.git
   - name: image-reference
     #value: registry.dev.svc.cluster.local:5000/dp01-ci/dp01:0.0.1
     value: image-registry.openshift-image-registry.svc:5000/dp01-ci/dp01:0.0.1
