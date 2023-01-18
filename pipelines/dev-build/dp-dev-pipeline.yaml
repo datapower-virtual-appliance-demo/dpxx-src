@@ -28,7 +28,7 @@ spec:
     type: string
   workspaces:
   - name: shared-data
-  - name: ssh-creds
+  - name: git-creds
   tasks:
   - name: clone-source
     taskRef:
@@ -36,8 +36,8 @@ spec:
     workspaces:
     - name: output
       workspace: shared-data
-    - name: ssh-directory
-      workspace: ssh-creds
+    - name: basic-auth
+      workspace: git-creds
     params:
     - name: url
       value: $(params.source-repo-url)
@@ -86,8 +86,8 @@ spec:
     workspaces:
     - name: output
       workspace: shared-data
-    - name: ssh-directory
-      workspace: ssh-creds
+    - name: basic-auth
+      workspace: git-creds
     params:
     - name: url
       value: $(params.ops-repo-url)
@@ -110,8 +110,8 @@ spec:
     workspaces:
     - name: source
       workspace: shared-data
-    - name: ssh-directory
-      workspace: ssh-creds
+    - name: basic-auth
+      workspace: git-creds
     params:
     - name: GIT_USER_NAME
       value: $(params.git-user-name)
