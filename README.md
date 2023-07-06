@@ -257,7 +257,7 @@ oc login
 ## Locate Datapower pipeline source
 
 ```bash
-cd $HOME/git/datapower/dp01-src/pipelines/dev-build
+$HOME/git/$GITORG-tutorial/dp01-src/pipelines/dev-build
 ls
 ```
 
