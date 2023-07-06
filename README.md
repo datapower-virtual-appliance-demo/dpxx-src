@@ -72,6 +72,7 @@ repository.
 
 Specifically:
 
+* In the `Owner` dropdown, select your recently created organization, e.g. `dporg-xxxxx`
 * In the `Repository name` field, specify `dp01-src`.
 * In the `Description` field, specify `Source repository for dp01 virtual
   appliance`.
