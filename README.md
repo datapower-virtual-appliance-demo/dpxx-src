@@ -72,7 +72,7 @@ repository.
 
 Specifically:
 
-* In the `Repository name` field, specify `dp01-sr`.
+* In the `Repository name` field, specify `dp01-src`.
 * In the `Description` field, specify `Source repository for dp01 virtual
   appliance`.
 * Select `Public` for the repository visibility.
