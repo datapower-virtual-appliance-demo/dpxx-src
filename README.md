@@ -56,6 +56,18 @@ This tutorial will walk you through the process of setting up this configuration
 
 ---
 
+## Recreating Environment Variables
+
+If you're doing this tutorial over an extended period, it may result in you using a different terminal session. In this case, 
+don't forget to re-define the following environment variables:
+
+```bash
+export GITUSER=<GitHub user name>
+export GITORG=dporg-$GITUSER
+export GITTOKEN=<PAT copied from GitHub>
+export GITCONFIG=$(printf "[credential \"https://github.com\"]\n  helper = store")
+```
+
 ## Creating the `dp01-src` repository
 
 We use this [template repository](https://github.com/dp-auto/dpxx-src) to create
@@ -98,7 +110,7 @@ In the terminal window, issue the following command:
 
 ```bash
 cd $HOME/git/$GITORG-tutorial
-git clone git@github.com:$GITORG/dp01-src.git
+git clone https://github.com/$GITORG/dp01-src.git
 cd dp01-src
 ```
 
