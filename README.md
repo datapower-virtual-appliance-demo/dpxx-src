@@ -338,7 +338,7 @@ oc apply -f dp-test.yaml
 ## Customize pipeline
 
 ```bash
-envsubst < dp-dev-pipelinerun.yaml >> dp-dev-pipelinerun.yaml
+envsubst < dp-dev-pipelinerun.yaml > dp-dev-pipelinerun.yaml
 ```
 
 
