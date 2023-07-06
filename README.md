@@ -139,7 +139,7 @@ Issue the following commands to see these branches
 git branch -r
 ```
 
-which shows two branches (not including HEAD, which is the current branch):
+which shows two branches (`HEAD` refers to the current branch):
 
 ```bash
 origin/HEAD -> origin/main
