@@ -339,7 +339,6 @@ oc apply -f dp-test.yaml
 
 ```bash
 envsubst < dp-dev-pipelinerun.yaml >> dp-dev-pipelinerun.yaml
-oc create -f dp-dev-pipelinerun.yaml
 ```
 
 
