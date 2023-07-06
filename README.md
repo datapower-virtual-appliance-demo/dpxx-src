@@ -338,8 +338,8 @@ oc apply -f dp-test.yaml
 ## Customize pipeline
 
 ```bash
-value: git@github.com:$GITORG/dp01-src.git
-value: git@github.com:$GITORG/dp01-ops.git
+envsubst < dp-dev-pipelinerun.yaml >> dp-dev-pipelinerun.yaml
+oc apply -f dp-dev-pipelinerun.yaml
 ```
 
 
