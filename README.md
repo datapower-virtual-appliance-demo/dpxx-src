@@ -110,7 +110,7 @@ In the terminal window, issue the following command:
 
 ```bash
 cd $HOME/git/$GITORG-tutorial
-git clone https://github.com/$GITORG/dp01-src.git
+git clone https://$GITTOKEN@github.com/$GITORG/dp01-src.git
 cd dp01-src
 ```
 
